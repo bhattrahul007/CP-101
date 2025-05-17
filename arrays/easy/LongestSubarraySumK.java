@@ -52,17 +52,30 @@ public class LongestSubarraySumK {
 
     public static int solution_3(int[] arr, int k) {
         int n = arr.length;
-        int i = 0;
-        int prefix = 0, max = 0;
-        for (int j = 0; j < n; j++) {
-            prefix += arr[j];
-            while (i <= j && prefix > k) {
-                prefix -= arr[i];
-                i++;
+//        int i = 0;
+//        int prefix = 0, max = 0;
+//        for (int j = 0; j < n; j++) {
+//            prefix += arr[j];
+//            while (i <= j && prefix > k) {
+//                prefix -= arr[i];
+//                i++;
+//            }
+//            if (prefix == k) {
+//                max = Math.max(max, j - i + 1);
+//            }
+//        }
+        int left = 0, right = 0;
+        int prefixSum = arr[0];
+        int max = 0;
+        while (right < n) {
+            while (left <= right && prefixSum > k) {
+                prefixSum -= arr[left];
+                left++;
             }
-            if (prefix == k) {
-                max = Math.max(max, j - i + 1);
-            }
+            if (prefixSum == k) max = Math.max(max, right - left + 1);
+            right++;
+            if (right < n) prefixSum += arr[right];
+
         }
         return max;
     }
