@@ -43,39 +43,39 @@ public class UnionOfSortedArray {
         int i = 0;
         int j = 0;
         List<Integer> result = new ArrayList<>();
-        int k = -1;
+        int lastElementInserted = Integer.MIN_VALUE;
         while (i < n1 && j < n2) {
             if (arr1[i] == arr2[j]) {
+                lastElementInserted = arr1[i];
                 result.add(arr1[i++]);
                 j++;
-                k++;
             } else if (arr1[i] < arr2[j]) {
-                if (k == -1 || result.get(k) < arr1[i]) {
+                if (lastElementInserted == Integer.MIN_VALUE || lastElementInserted != arr1[i]) {
                     result.add(arr1[i]);
-                    k++;
+                    lastElementInserted = arr1[i];
                 }
                 i++;
             } else {
-                if (k == -1 || result.get(k) < arr2[j]) {
+                if (lastElementInserted == Integer.MIN_VALUE || lastElementInserted != arr2[j]) {
                     result.add(arr2[j]);
-                    k++;
+                    lastElementInserted = arr2[j];
                 }
                 j++;
             }
         }
 
         while (i < n1) {
-            if (k == -1 || result.get(k) < arr1[i]) {
+            if (lastElementInserted == Integer.MIN_VALUE || lastElementInserted != arr1[i]) {
                 result.add(arr1[i]);
-                k++;
+                lastElementInserted = arr1[i];
             }
             i++;
         }
 
         while (j < n2) {
-            if (k == -1 || result.get(k) < arr2[j]) {
+            if (lastElementInserted == Integer.MIN_VALUE || lastElementInserted != arr2[j]) {
                 result.add(arr2[j]);
-                k++;
+                lastElementInserted = arr2[j];
             }
             j++;
         }
