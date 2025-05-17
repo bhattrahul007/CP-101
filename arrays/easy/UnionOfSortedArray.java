@@ -1,7 +1,6 @@
 package arrays.easy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Problem Statement: Given two sorted arrays, arr1, and arr2 of size n and m. Find the union of two sorted arrays.
@@ -37,6 +36,13 @@ import java.util.List;
  * Union of arr1 and arr2 is {1,2,3,4,5,6,7,8,9,10,11,12}
  */
 public class UnionOfSortedArray {
+    public static int[] solution_1(int[] arr1, int[] arr2) {
+        Set<Integer> s = new HashSet<>();
+        for (int i : arr1) s.add(i);
+        for (int i : arr2) s.add(i);
+        return new ArrayList<>(s).stream().mapToInt(Integer::intValue).toArray();
+    }
+
     public static int[] solution_2(int[] arr1, int[] arr2) {
         int n1 = arr1.length;
         int n2 = arr2.length;
@@ -80,5 +86,17 @@ public class UnionOfSortedArray {
             j++;
         }
         return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {2, 3, 4, 4, 5};
+        int[] result1 = UnionOfSortedArray.solution_1(arr1, arr2);
+        System.out.println("Task [1]: " + Arrays.toString(result1));
+
+        int[] arr3 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] arr4 = {2, 3, 4, 4, 5, 11, 12};
+        int[] result2 = UnionOfSortedArray.solution_1(arr3, arr4);
+        System.out.println("Task [2]: " + Arrays.toString(result2));
     }
 }
