@@ -17,11 +17,10 @@ import java.util.Arrays;
  */
 public class SortZeroOneAndTwo {
     public static void solution_1(int[] arr, int n) {
-        int zero_count = 0, one_count = 0, two_count = 0;
+        int zero_count = 0, one_count = 0;
         for (int i : arr) {
             if (i == 0) zero_count++;
             else if (i == 1) one_count++;
-            else two_count++;
         }
         for (int i = 0; i < n; i++) {
             if (zero_count > 0) {
@@ -32,7 +31,6 @@ public class SortZeroOneAndTwo {
                 one_count--;
             } else {
                 arr[i] = 2;
-                two_count--;
             }
         }
     }
